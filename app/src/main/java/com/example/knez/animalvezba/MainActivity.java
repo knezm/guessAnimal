@@ -2,9 +2,11 @@ package com.example.knez.animalvezba;
 
 
 import android.content.SharedPreferences;
+import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -141,6 +143,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void addAnimalPic( Animal animal, GridLayout gridLayout){
         View animalPic = getLayoutInflater().inflate(R.layout.animal_pic, null);
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+        animalPic.setLayoutParams(new GridLayout.LayoutParams());
+        animalPic.getLayoutParams().width = width/3 - 8;
+        animalPic.getLayoutParams().height = width/3 - 8;
+        animalPic.requestLayout();
+
         final String name = animal.getName();
 
         ImageView img = (ImageView)animalPic.findViewById(R.id.animal_pic);
